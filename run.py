@@ -6,7 +6,7 @@ from os import path,getenv,system
 from xml.etree.ElementTree import ElementTree,Element
 
 # plist 路径, 从环境变量中获取
-plist_file = getenv("PRODUCT_SETTINGS_PATH") or 'Info.plist'
+plist_file = getenv("PRODUCT_SETTINGS_PATH")
 
 # plist 文件存在时才开始替换
 if (plist_file != None) and (path.exists(plist_file)):
@@ -26,8 +26,8 @@ if (plist_file != None) and (path.exists(plist_file)):
     for row in all_data:
         
         if next_to_stop:
-            # 替换成当前日期,格式为 YYYYmmDD_HHMMSS
-            row.text = time.strftime('%Y%m%d_%H%M%S', time.localtime(time.time()))
+            # 替换成当前日期,格式为 YYMMDDHHMM
+            row.text = time.strftime('%y%m%d%H%M', time.localtime(time.time()))
             break
         
         # 找到 CFBundleVersion 位置
